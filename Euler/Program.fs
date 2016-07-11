@@ -77,12 +77,10 @@ let answer7 =
         |> Seq.last
 
 let answer8 = 
-    File.ReadAllLines(@"C:\Users\Will\Documents\Euler\ProjectEuler\Euler\euler8.txt")
-    |> Array.toSeq
-    |> Seq.concat
+    File.ReadAllText(@"Euler\euler8.txt")
     |> Seq.map (fun c -> int32(c.ToString()))
     |> Seq.windowed 13
-    |> Seq.map (fun ints -> ints |> Array.fold (fun acc elem -> acc * elem) 1)
+    |> Seq.map (fun ints -> ints |> Seq.fold (fun acc elem -> acc * int64(elem)) 1L)
     |> Seq.max     
 
 
