@@ -2,8 +2,9 @@ open System
 
 let factorsOf (x: int64) =
     let upperBound = int64(Math.Sqrt(double(x)))
-    [1L..upperBound]
+    [2L..upperBound]
     |> Seq.where (fun i -> x % i = 0L)
+    |> Seq.append [1L]
     |> Seq.collect (fun n -> [n; x/n])
 
 let triangularNumbers =
