@@ -15,5 +15,6 @@ let naturalNumbers =
 
 let answer14 =
     naturalNumbers
+    |> Seq.take 999999
     |> Seq.map (fun seed -> (seed, collatz seed |> Seq.length))
-    |> Seq.maxBy (fun tpl -> snd(tpl)
+    |> Seq.maxBy (fun tpl -> snd(tpl))
