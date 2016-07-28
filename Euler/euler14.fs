@@ -1,8 +1,8 @@
 open System
 
 let nextCollatz n =
-    match n with
-    | var1 when var1 % 2L = 0L -> n/2L
+    match n % 2L with
+    | 0L -> n/2L
     | _ -> (3L * n) + 1L
 
 let collatz seed =
