@@ -19,7 +19,6 @@ let sumAmicableNumbers =
     seq {0..9999}
     |> Seq.map (fun x -> amicablePair x)
     |> Seq.choose id
-    |> Seq.map (fun opt -> snd(opt) + fst(opt))
-    |> Seq.sum
+    |> Seq.sumBy (fun (fst, snd) -> fst + snd)
     
 let answer21 = sumAmicableNumbers / 2
