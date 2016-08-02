@@ -2,10 +2,9 @@ open System
 open System.IO
 
 let scoreString name =
-    name |> Seq.map (fun c -> int(c) - 64)
+    name
+    |> Seq.map (fun c -> int(c) - 64)
     |> Seq.sum
-
-let test = scoreString ("abcdefghijklmnopqrstuvwxyz".ToUpper())
 
 let names =
     File.ReadAllLines("p022_names.txt")
@@ -21,7 +20,7 @@ let position =
     seq{1..Seq.length scores}
 
 let answer22 =
-    Seq.map2 (fun pos score -> pos * score)  scores position
+    Seq.map2 (fun pos score -> pos * score) position scores
     |> Seq.sum
 
 
