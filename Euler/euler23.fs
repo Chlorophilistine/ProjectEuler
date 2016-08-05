@@ -18,10 +18,6 @@ let abundantNumbers =
     |> Seq.map int32
     |> Seq.where isAbundant
 
-let isSumAbundant n =
-    let pairs = Seq.collect (fun item -> Seq.map (fun x -> (item, x)) abundantNumbers) abundantNumbers
-    pairs |> Seq.exists (fun (a,b) -> a + b = n)
-
 let abundantSums =
     abundantNumbers
     |> Seq.collect (fun x -> Seq.map( fun y -> x + y) abundantNumbers)
