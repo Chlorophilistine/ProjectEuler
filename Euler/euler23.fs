@@ -25,7 +25,7 @@ let isSumAbundant n =
 let abundantSums =
     abundantNumbers
     |> Seq.collect (fun x -> Seq.map( fun y -> x + y) abundantNumbers)
-    |> Seq.where (fun sum -> sum < 21823)
+    |> Seq.where (fun sum -> sum <= 21823)
     |> Seq.distinct
 
 let answer23 =
