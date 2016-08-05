@@ -11,27 +11,22 @@ let divisors n =
 let isAbundant n =
     (divisors n |> Seq.sum) > n
 
-
 let abundantNumbers =
     naturalNumbers
     |> Seq.take 28122
     |> Seq.skip 10
     |> Seq.map int32
     |> Seq.where isAbundant
-    |> Seq.toArray
-
-let an = abundantNumbers
 
 let isSumAbundant n =
-    let pairs = Seq.collect (fun item -> Seq.map (fun x -> (item, x)) an) an
+    let pairs = Seq.collect (fun item -> Seq.map (fun x -> (item, x)) abundantNumbers) abundantNumbers
     pairs |> Seq.exists (fun (a,b) -> a + b = n)
 
+let abundantSums =
+    abundantNumbers
+    |> Seq.collect (fun x -> Seq.map( fun y -> x + y) abundantNumbers)
+    |> Seq.where (fun sum -> sum < 21823)
+    |> Seq.distinct
 
-let notAbundant =
-    naturalNumbers
-    |> Seq.take 28122
-    |> Seq.skip 10
-    |> Seq.map int32
-    |> Seq.where (fun x -> isSumAbundant x = false)
-
-let answer32 = notAbundant |> Seq.sum
+let answer23 =
+    (seq {1..28123} |> Seq.sum) - (abundantSums |> Seq.sum)
