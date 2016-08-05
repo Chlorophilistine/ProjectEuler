@@ -15,7 +15,7 @@ let answer1 =
     |> Seq.sum
 
 let fibonacci =
-    Seq.unfold (fun(current, next) -> Some(current, (next, current + next))) (0, 1)
+    Seq.unfold (fun(current, next) -> Some(current, (next, current + next))) (1, 1)
 
 let answer2 =
     fibonacci
