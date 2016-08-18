@@ -1,6 +1,6 @@
 open System
 
-let range = seq{1L..999999999L}
+let range = seq{1000L..9999L}
 
 let pandigitalSequence = seq {1..9}
 
