@@ -49,6 +49,7 @@
     <Compile Include="Euler10.fs" />
     <Compile Include="euler11.fs" />
     <Compile Include="euler12.fs" />
+    <Compile Include="euler33.fs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <Choose>

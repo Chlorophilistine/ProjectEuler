@@ -1,3 +1,5 @@
+module Euler.Ten
+
 open System
 
 let factorsOf (x: int64) =
