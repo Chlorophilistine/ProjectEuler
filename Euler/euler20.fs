@@ -1,6 +1,5 @@
 let factorial n =
-    Seq.unfold (fun state -> if(state = 1I) then None else Some(state, state - 1I)) n
-    |> Seq.fold (fun acc next -> acc * next) 1I
+    if(n = 0I) then 1I else seq {1I..n} |> Seq.reduce (fun acc next -> acc * next)
 
 
 let answer20 =
