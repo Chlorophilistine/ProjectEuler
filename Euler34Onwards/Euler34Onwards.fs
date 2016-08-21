@@ -42,7 +42,7 @@ module ThirtyFour =
         naturalNumbers
         |> Seq.find (fun n -> digitsIn (maxSumOfNDigits n) < n)
 
-    let thing =
+    let answer34 =
         seq{3I..smallestNDigitNumber(maxDigits)}
         |> Seq.where (fun n -> n = bigint(sumOfDigitFactorials n))
-        |> Seq.toArray
+        |> Seq.sum
