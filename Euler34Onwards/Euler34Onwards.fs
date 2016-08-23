@@ -75,3 +75,20 @@ module ThirtyFive =
             |> Seq.length
         n + 13
 
+module ThirtySix =
+
+    let inBinary (x: int) = Convert.ToString(x, 2) 
+
+    let isPalindromicInBase10AndBase2 n =
+        let palindromicInBase10 = String.Join("", (n.ToString() |> Seq.toArray |> Array.rev)) = n.ToString()
+        let inBase2 = inBinary n
+        let palindromicInBase2 = String.Join("", (inBase2 |> Seq.toArray |> Array.rev)) = inBase2
+        palindromicInBase10 && palindromicInBase2
+
+    let answer36 =
+        [1..999999]
+        |> Seq.where isPalindromicInBase10AndBase2
+        |> Seq.sum
+
+
+    
