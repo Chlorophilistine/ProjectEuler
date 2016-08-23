@@ -67,7 +67,6 @@ module ThirtyFive =
         |> List.map int32
         |> List.filter (fun s -> s.ToString().Length = xStr.Length)
 
-
     let answer35 =
         let n =
             seq {100..999999}
