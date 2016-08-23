@@ -3,6 +3,7 @@ namespace Euler34Onwards
 type Euler34Onwards() = 
     member this.X = "F#"
 
+open System
 open System.Collections.Generic
 
 module ThirtyFour =
@@ -46,3 +47,32 @@ module ThirtyFour =
         seq{3I..smallestNDigitNumber(maxDigits)}
         |> Seq.where (fun n -> n = bigint(sumOfDigitFactorials n))
         |> Seq.sum
+
+module ThirtyFive =
+    
+    let factorsOf (x: int64) =
+        let upperBound = int64(Math.Sqrt(double(x)))
+        [2L..upperBound]
+        |> Seq.where (fun i -> x % i = 0L)
+
+    let isPrime x =
+        (x > 1L) && (factorsOf x |> Seq.isEmpty)
+
+    let permutations (x: int32) =
+        let xStr = x.ToString() |> Seq.toList
+        let numPermutations = (xStr |> Seq.length) - 1
+        [0..numPermutations]
+        |> List.map (fun p -> List.permute (fun index -> (index + p) % (numPermutations + 1)) xStr)
+        |> List.map (fun s -> String.Join("", s |> List.toArray))
+        |> List.map int32
+        |> List.filter (fun s -> s.ToString().Length = xStr.Length)
+
+
+    let answer35 =
+        let n =
+            seq {100..999999}
+            |> Seq.where (int64 >> isPrime)
+            |> Seq.where (fun x -> x |> permutations |> (fun m -> not (Seq.isEmpty m) && (Seq.forall (int64 >> isPrime) m)))
+            |> Seq.length
+        n + 13
+
