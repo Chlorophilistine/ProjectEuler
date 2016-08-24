@@ -118,3 +118,28 @@ module ThirtySeven =
         |> Seq.where (fun (p, ps) -> Seq.forall isPrime ps)
         |> Seq.take 11
         |> Seq.sumBy (fun (p, ps) -> p)
+
+module ThirtyEight =
+
+    let pandigitalSequence = seq {1..9}
+    
+    let comparison a b =
+        if(a = b) then 0
+        else if(a < b) then -1
+        else 1
+
+    let isPandigital x =
+        let areEqual = x.ToString() |> Seq.map (fun c -> int32(c.ToString())) |> Seq.sort |> Seq.compareWith comparison pandigitalSequence
+        areEqual = 0
+
+    let possibleIntegers = seq{1..10000}
+
+
+    
+    let answer38 =
+        possibleIntegers
+        |>
+
+
+//        |> Seq.map (fun i -> i |> Seq.unfold (fun state -> if(state = 0) then None else Some(state, state - 1)))
+//        |> Seq.where 
