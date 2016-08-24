@@ -90,5 +90,31 @@ module ThirtySix =
         |> Seq.where isPalindromicInBase10AndBase2
         |> Seq.sum
 
+module ThirtySeven =
 
-    
+    let factorsOf (x: int64) =
+        let upperBound = int64(Math.Sqrt(double(x)))
+        [2L..upperBound]
+        |> Seq.where (fun i -> x % i = 0L)
+
+    let isPrime x =
+        (x > 1L) && (factorsOf x |> Seq.isEmpty)
+
+    let naturalNumbers = Seq.unfold (fun state -> Some(state, state + 1L)) 1L
+
+    let sequenceOfTruncatedNumbers (x: int64) truncator =
+        let sX = x.ToString() |> Seq.toList
+        sX |> Seq.unfold (fun state -> if(state |> Seq.isEmpty) then None else Some(new String(state |> List.toArray) |> int64, (truncator state)))
+
+    let generateTruncatedSequence (x: int64) =
+        Seq.append (sequenceOfTruncatedNumbers x List.tail) (sequenceOfTruncatedNumbers x (List.rev >> List.tail >> List.rev))
+        |> Seq.distinct
+
+    let answer37 =
+        naturalNumbers
+        |> Seq.skip 8
+        |> Seq.where isPrime
+        |> Seq.map (fun i -> (i, generateTruncatedSequence i))
+        |> Seq.where (fun (p, ps) -> Seq.forall isPrime ps)
+        |> Seq.take 11
+        |> Seq.sumBy (fun (p, ps) -> p)
