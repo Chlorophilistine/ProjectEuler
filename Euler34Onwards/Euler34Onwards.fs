@@ -128,18 +128,23 @@ module ThirtyEight =
         else if(a < b) then -1
         else 1
 
-    let isPandigital x =
-        let areEqual = x.ToString() |> Seq.map (fun c -> int32(c.ToString())) |> Seq.sort |> Seq.compareWith comparison pandigitalSequence
+    let isPandigital (x: string) =
+        let areEqual = x |> Seq.map (fun c -> int32(c.ToString())) |> Seq.sort |> Seq.compareWith comparison pandigitalSequence
         areEqual = 0
 
     let possibleIntegers = seq{1..10000}
 
-
+    let generatePotentialPanDigitalSequence n =
+        let mutable s = ""
+        let mutable i = 1
+        while (Seq.length s) < 9 do
+            s<- s + (i * n).ToString()
+            i<- (i+1)
+        s
     
     let answer38 =
         possibleIntegers
-        |>
-
-
-//        |> Seq.map (fun i -> i |> Seq.unfold (fun state -> if(state = 0) then None else Some(state, state - 1)))
-//        |> Seq.where 
+        |> Seq.map generatePotentialPanDigitalSequence
+        |> Seq.where (fun s -> Seq.length s = 9)
+        |> Seq.where isPandigital
+        |> Seq.maxBy (fun s -> int32(s))
