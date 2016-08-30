@@ -148,3 +148,36 @@ module ThirtyEight =
         |> Seq.where (fun s -> Seq.length s = 9)
         |> Seq.where isPandigital
         |> Seq.maxBy (fun s -> int32(s))
+
+
+module FortyOne =
+
+    let pandigitalSequence = seq {1..9}
+    
+    let comparison a b =
+        if(a = b) then 0
+        else if(a < b) then -1
+        else 1
+
+    let isPandigital (x: string) =
+        let areEqual = x |> Seq.map (fun c -> int32(c.ToString())) |> Seq.sort |> Seq.compareWith comparison pandigitalSequence
+        areEqual = 0
+
+    let factorsOf (x: int64) =
+        let upperBound = int64(Math.Sqrt(double(x)))
+        [2L..upperBound]
+        |> Seq.where (fun i -> x % i = 0L)
+
+    let isPrime x =
+        (x > 1L) && (factorsOf x |> Seq.isEmpty)
+
+    let answer41 =
+        seq{987654321L .. -1L .. 1L}
+        |> Seq.where (fun x -> isPandigital (x.ToString()))
+        |> Seq.find isPrime
+
+// dumb solution which will work. Better to generate all pandigitals, then check for prime, then take largest
+
+
+    
+
